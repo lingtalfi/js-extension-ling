@@ -19,6 +19,21 @@ npm install js-extension-ling
 Functions
 ===========
 
+escapeHtml
+----------
+2020-04-02
+
+Returns the html escaped version of the given string.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.escapeHtml("<h1>ok</h1>")); // &lt;h1&gt;ok&lt;/h1&gt;
+```
+
+
+
 humanSize
 ----------
 2020-04-02
@@ -58,6 +73,10 @@ console.log(jsx.mimeIsImage("application/javascript")); // false
 History Log
 =============
 
+- 1.2.0 -- 2020-04-02
+
+    - add escapeHtml function
+    
 - 1.1.0 -- 2020-04-02
 
     - add mimeIsImage function
