@@ -1,0 +1,13 @@
+{
+  "name": "js-extension-ling",
+  "version": "1.0.0",
+  "description": "A js helper library.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["tools"],
+  "author": "lingtalfi",
+  "homepage": "https://github.com/lingtalfi/js-extension-ling",
+  "license": "ISC"
+}
