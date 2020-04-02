@@ -34,6 +34,7 @@ console.log(jsx.escapeHtml("<h1>ok</h1>")); // &lt;h1&gt;ok&lt;/h1&gt;
 
 
 
+
 humanSize
 ----------
 2020-04-02
@@ -64,6 +65,22 @@ console.log(jsx.mimeIsImage("application/javascript")); // false
 
 
 
+startsWith
+----------
+2020-04-02
+
+Returns whether a string starts with another one.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.startsWith("attention please", "attention")); // true
+console.log(jsx.startsWith("attention please", "please")); // false
+```
+
+
+
 
 
 
@@ -73,6 +90,10 @@ console.log(jsx.mimeIsImage("application/javascript")); // false
 History Log
 =============
 
+- 1.3.0 -- 2020-04-02
+
+    - add startsWith function
+    
 - 1.2.0 -- 2020-04-02
 
     - add escapeHtml function
