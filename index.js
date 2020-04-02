@@ -7,6 +7,12 @@ var jsx = {
         var c = 1024, d = decimals || 2, e = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
             f = Math.floor(Math.log(bytes) / Math.log(c));
         return parseFloat((bytes / Math.pow(c, f)).toFixed(d)) + " " + e[f]
+    },
+    mimeIsImage: function (mime) {
+        if (!mime.match(/^image\//)) {
+            return false;
+        }
+        return true;
     }
 };
 
