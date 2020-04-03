@@ -182,6 +182,45 @@ console.log(jsx.mimeIsImage("application/javascript")); // false
 
 
 
+objectToQueryString
+----------
+2020-04-03
+
+Builds and returns the query string from the given parameter object (nesting is supported).
+
+The optional encodeParams boolean parameter defaults to false, and allows you to encode
+the result as an uri component (encodeURIComponent).
+
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.objectToQueryString({
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+})); // name=boris&age=42&hobbies[0]=judo&hobbies[1]=karate&fish[small]=john&fish[big]=alice
+
+console.log(jsx.objectToQueryString({
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+}, true)); // name=boris&age=42&hobbies%5B0%5D=judo&hobbies%5B1%5D=karate&fish%5Bsmall%5D=john&fish%5Bbig%5D=alice
+
+console.log(jsx.objectToQueryString({name: "boris"})); // name=boris
+```
+
+
+
 startsWith
 ----------
 2020-04-02
@@ -217,6 +256,48 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 
 
 
+url_merge_params
+----------
+2020-04-03
+
+Combines the given url with the given url params and returns the result (nesting of params is supported).
+The third argument encodeParams defaults to true, and defines whether to encode the components using the encodeURIComponent js function.
+
+
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.url_merge_params("/my/url", {
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+})); // /my/url?name=boris&age=42&hobbies%5B0%5D=judo&hobbies%5B1%5D=karate&fish%5Bsmall%5D=john&fish%5Bbig%5D=alice
+
+console.log(jsx.url_merge_params("/my/url", {
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+}, false)); // /my/url?name=boris&age=42&hobbies[0]=judo&hobbies[1]=karate&fish[small]=john&fish[big]=alice
+
+console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=1&name=boris
+
+
+```
+
+
+
+
+
 
 
 
@@ -224,6 +305,10 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 History Log
 =============
 
+- 1.8.0 -- 2020-04-03
+
+    - add objectToQueryString and url_merge_params functions
+    
 - 1.7.0 -- 2020-04-03
 
     - add isEmptyObject function

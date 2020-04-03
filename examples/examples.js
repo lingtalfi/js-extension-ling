@@ -66,3 +66,49 @@ console.log(jsx.str_contains("hello world", "Orl")); // false
 console.log(jsx.str_contains("hello world", "blue")); // false
 console.log(jsx.isEmptyObject({})); // true
 console.log(jsx.isEmptyObject({"do": "123"})); // false
+console.log(jsx.url_merge_params("/my/url", {
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+})); // /my/url?name=boris&age=42&hobbies%5B0%5D=judo&hobbies%5B1%5D=karate&fish%5Bsmall%5D=john&fish%5Bbig%5D=alice
+
+console.log(jsx.url_merge_params("/my/url", {
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+}, false)); // /my/url?name=boris&age=42&hobbies[0]=judo&hobbies[1]=karate&fish[small]=john&fish[big]=alice
+
+console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=1&name=boris
+
+
+
+console.log(jsx.objectToQueryString({
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+})); // name=boris&age=42&hobbies[0]=judo&hobbies[1]=karate&fish[small]=john&fish[big]=alice
+
+console.log(jsx.objectToQueryString({
+    name: "boris",
+    age: 42,
+    hobbies: ["judo", "karate"],
+    fish: {
+        small: "john",
+        big: "alice",
+    },
+}, true)); // name=boris&age=42&hobbies%5B0%5D=judo&hobbies%5B1%5D=karate&fish%5Bsmall%5D=john&fish%5Bbig%5D=alice
+
+console.log(jsx.objectToQueryString({name: "boris"})); // name=boris
+

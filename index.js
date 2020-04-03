@@ -102,7 +102,48 @@ var jsx = {
         return haystack.indexOf(needle) !== -1;
     },
 
+    objectToQueryString: function (obj, encodeParams) {
+        return this._serialize(obj, encodeParams);
+    },
 
+    url_merge_params: function (url, params, encodeParams = true) {
+        var q = this.objectToQueryString(params, encodeParams);
+
+        if (false === this.str_contains(url, "?")) {
+            url += '?';
+        } else {
+            url += '&';
+        }
+        url += q;
+        return url;
+    },
+
+
+    //----------------------------------------
+    // PRIVATE
+    //----------------------------------------
+    // adaoted from https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+    _serialize: function (obj, useEncoder, prefix) {
+        var str = [],
+            p;
+        for (p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                var k = prefix ? prefix + "[" + p + "]" : p,
+                    v = obj[p];
+
+                if (v !== null && typeof v === "object") {
+                    str.push(this._serialize(v, useEncoder, k));
+                } else {
+                    if (true === useEncoder) {
+                        str.push(encodeURIComponent(k) + "=" + encodeURIComponent(v));
+                    } else {
+                        str.push(k + "=" + v);
+                    }
+                }
+            }
+        }
+        return str.join("&");
+    },
     _testTypes: function () {
         // https://ultimatecourses.com/blog/understanding-javascript-types-and-reliable-type-checking
 
