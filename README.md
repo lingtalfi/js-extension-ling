@@ -211,7 +211,7 @@ History Log
 
 - 1.6.0 -- 2020-04-03
 
-    - add extend function
+    - add str_contains function
 
 - 1.5.0 -- 2020-04-03
 
