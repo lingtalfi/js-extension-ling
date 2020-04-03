@@ -64,3 +64,5 @@ console.log(jsx.extend(true, object1, object2, object3));
 console.log(jsx.str_contains("hello world", "orl")); // true
 console.log(jsx.str_contains("hello world", "Orl")); // false
 console.log(jsx.str_contains("hello world", "blue")); // false
+console.log(jsx.isEmptyObject({})); // true
+console.log(jsx.isEmptyObject({"do": "123"})); // false

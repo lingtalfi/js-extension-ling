@@ -70,6 +70,15 @@ var jsx = {
         return '[object Array]' === Object.prototype.toString.call(thing);
     },
 
+
+    // https://code.jquery.com/jquery-3.4.1.js
+    isEmptyObject: function (obj) {
+        var name;
+        for (name in obj) {
+            return false;
+        }
+        return true;
+    },
     isPlainObject: function (thing) {
         return '[object Object]' === Object.prototype.toString.call(thing);
     },

@@ -118,6 +118,21 @@ console.log(jsx.isArray(function(){})); // false
 ```
 
 
+isEmptyObject
+----------
+2020-04-03
+
+Returns whether the given plain object is empty.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.isEmptyObject({})); // true
+console.log(jsx.isEmptyObject({"do": "123"})); // false
+```
+
+
 
 isFunction
 ----------
@@ -208,6 +223,10 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 
 History Log
 =============
+
+- 1.7.0 -- 2020-04-03
+
+    - add isEmptyObject function
 
 - 1.6.0 -- 2020-04-03
 
