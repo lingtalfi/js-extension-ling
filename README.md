@@ -183,6 +183,23 @@ console.log(jsx.startsWith("attention please", "please")); // false
 
 
 
+str_contains
+----------
+2020-04-03
+
+Returns whether a string contains another. This is case sensitive.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.str_contains("hello world", "orl")); // true
+console.log(jsx.str_contains("hello world", "Orl")); // false
+console.log(jsx.str_contains("hello world", "blue")); // false
+```
+
+
+
 
 
 
@@ -191,6 +208,10 @@ console.log(jsx.startsWith("attention please", "please")); // false
 
 History Log
 =============
+
+- 1.6.0 -- 2020-04-03
+
+    - add extend function
 
 - 1.5.0 -- 2020-04-03
 

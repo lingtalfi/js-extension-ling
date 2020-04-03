@@ -87,6 +87,13 @@ var jsx = {
     startsWith: function (haystack, needle) {
         return haystack.substring(0, needle.length) === needle;
     },
+
+
+    str_contains: function (haystack, needle) {
+        return haystack.indexOf(needle) !== -1;
+    },
+
+
     _testTypes: function () {
         // https://ultimatecourses.com/blog/understanding-javascript-types-and-reliable-type-checking
 
