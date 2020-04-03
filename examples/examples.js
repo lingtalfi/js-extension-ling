@@ -89,7 +89,6 @@ console.log(jsx.url_merge_params("/my/url", {
 console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=1&name=boris
 
 
-
 console.log(jsx.objectToQueryString({
     name: "boris",
     age: 42,
@@ -119,3 +118,9 @@ console.log(jsx.getFileExtension("index")); // <emptyString>
 console.log(jsx.getFileExtension(".index")); // index
 console.log(jsx.getFileExtension(".index.md")); // md
 
+
+var testArray = new Array();
+testArray[3] = "qwerty";
+testArray[7] = "asdfgh";
+testArray[13] = "zxcvbn";
+console.log(jsx.reindex(testArray)); // [ 'qwerty', 'asdfgh', 'zxcvbn' ]

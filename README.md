@@ -289,6 +289,24 @@ async function callService(params) {
 
 
 
+reindex
+----------
+2020-04-03
+
+Re-indexes the given array, starting from index 0 and removing undefined items.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+var testArray = new Array();
+testArray[3] = "qwerty";
+testArray[7] = "asdfgh";
+testArray[13] = "zxcvbn";
+console.log(jsx.reindex(testArray)); // [ 'qwerty', 'asdfgh', 'zxcvbn' ]
+```
+
+
 startsWith
 ----------
 2020-04-02
@@ -373,6 +391,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.11.0 -- 2020-04-03
+
+    - add reindex function
+    
 - 1.10.0 -- 2020-04-03
 
     - add getFileExtension function, fix post wrong inner references

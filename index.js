@@ -55,9 +55,8 @@ var jsx = {
     },
 
 
-
-    getFileExtension: function(path){
-        if(false === this.str_contains(path, ".")){
+    getFileExtension: function (path) {
+        if (false === this.str_contains(path, ".")) {
             return "";
         }
         return path.split('.').pop();
@@ -172,6 +171,13 @@ var jsx = {
     },
 
 
+    // https://stackoverflow.com/questions/4759745/javascript-reindexing-an-array
+    reindex: function (array) {
+        return array.filter(function (item) {
+            return item !== undefined
+        });
+    },
+
     startsWith: function (haystack, needle) {
         return haystack.substring(0, needle.length) === needle;
     },
@@ -180,7 +186,6 @@ var jsx = {
     str_contains: function (haystack, needle) {
         return haystack.indexOf(needle) !== -1;
     },
-
 
 
     url_merge_params: function (url, params, encodeParams = true) {
