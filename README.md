@@ -33,6 +33,59 @@ console.log(jsx.escapeHtml("<h1>ok</h1>")); // &lt;h1&gt;ok&lt;/h1&gt;
 ```
 
 
+extend
+----------
+2020-04-03
+
+Merges the contents of two or more objects together into the first object.
+
+If the first argument is a boolean, the merging applies recursively.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+var object1 = {
+    apple: 0,
+    banana: {weight: 52, price: 100},
+    cherry: 97
+};
+var object2 = {
+    banana: {price: 200},
+    durian: 100
+};
+var object3 = {
+    apple: 'yum',
+    pie: 3.214,
+    applePie: true
+};
+
+// Create a new object by combining two or more objects
+console.log(jsx.extend(object1, object2, object3));
+/**
+ {
+  apple: 'yum',
+  banana: { price: 200 },
+  cherry: 97,
+  durian: 100,
+  pie: 3.214,
+  applePie: true
+}
+ */
+console.log(jsx.extend(true, object1, object2, object3));
+/**
+ {
+  apple: 'yum',
+  banana: { weight: 52, price: 200 },
+  cherry: 97,
+  durian: 100,
+  pie: 3.214,
+  applePie: true
+}
+ */
+```
+
+
 
 
 humanSize
@@ -139,6 +192,10 @@ console.log(jsx.startsWith("attention please", "please")); // false
 History Log
 =============
 
+- 1.5.0 -- 2020-04-03
+
+    - add extend function
+    
 - 1.4.0 -- 2020-04-03
 
     - add isPlainObject, isArray, isFunction functions
