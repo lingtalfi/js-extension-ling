@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02
+2020-04-02 -> 2020-04-03
 
 A js helper library.
 
@@ -18,6 +18,41 @@ npm install js-extension-ling
 
 Functions
 ===========
+
+basename
+----------
+2020-04-03
+
+Returns the last of the (forward) slash separated components in the given path.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.basename("/")); // <emptyString>
+console.log(jsx.basename("/hello")); // hello
+console.log(jsx.basename("/hello/world")); // world
+console.log(jsx.basename("/hello/world.com")); // world.com
+```
+
+
+dirname
+----------
+2020-04-03
+
+Returns the directory name of the given path.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.dirname("/etc/passwd")); // /etc
+console.log(jsx.dirname("c:/Temp/x")); // c:/Temp
+console.log(jsx.dirname("/dir/test/")); // /dir
+console.log(jsx.dirname("top")); // top
+console.log(jsx.dirname("autumn/top///")); // autumn/top
+```
+
 
 escapeHtml
 ----------
@@ -391,6 +426,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.12.0 -- 2020-04-03
+
+    - add basename and dirname functions
+    
 - 1.11.0 -- 2020-04-03
 
     - add reindex function

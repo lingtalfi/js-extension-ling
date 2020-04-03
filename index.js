@@ -1,5 +1,19 @@
 var jsx = {
 
+
+    basename: function (path) {
+        return path.split(/[\\/]/).pop();
+    },
+
+    // adapted from https://locutus.io/php/filesystem/dirname/
+    dirname: function (path) {
+        var ret = path.replace(/\\/g, '/').replace(/\/[^/]*\/?$/, '');
+        if ('/' === ret.charAt(ret.length - 1)) {
+            ret = ret.substr(0, ret.length - 1);
+        }
+        return ret;
+    },
+
     // https://stackoverflow.com/questions/1787322/htmlspecialchars-equivalent-in-javascript
     escapeHtml: function (text) {
         var map = {
@@ -186,7 +200,6 @@ var jsx = {
     str_contains: function (haystack, needle) {
         return haystack.indexOf(needle) !== -1;
     },
-
 
     url_merge_params: function (url, params, encodeParams = true) {
         var q = this.objectToQueryString(params, encodeParams);

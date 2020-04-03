@@ -124,3 +124,18 @@ testArray[3] = "qwerty";
 testArray[7] = "asdfgh";
 testArray[13] = "zxcvbn";
 console.log(jsx.reindex(testArray)); // [ 'qwerty', 'asdfgh', 'zxcvbn' ]
+console.log(jsx.basename("/")); // <emptyString>
+console.log(jsx.basename("/hello")); // hello
+console.log(jsx.basename("/hello/world")); // world
+console.log(jsx.basename("/hello/world.com")); // world.com
+
+
+console.log(jsx.dirname("/etc/passwd")); // /etc
+console.log(jsx.dirname("c:/Temp/x")); // c:/Temp
+console.log(jsx.dirname("/dir/test/")); // /dir
+console.log(jsx.dirname("top")); // top
+console.log(jsx.dirname("autumn/top///")); // autumn/top
+
+
+
+
