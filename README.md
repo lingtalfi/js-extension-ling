@@ -49,6 +49,55 @@ console.log(jsx.humanSize(5000)); // 4.88 KB
 ```
 
 
+isArray
+----------
+2020-04-03
+
+Returns whether the given parameter is an array.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.isArray({"name": "boris"})); // false
+console.log(jsx.isArray(["boris"])); // true
+console.log(jsx.isArray(function(){})); // false
+```
+
+
+
+isFunction
+----------
+2020-04-03
+
+Returns whether the given parameter is a function.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.isFunction({"name": "boris"})); // false
+console.log(jsx.isFunction(["boris"])); // false
+console.log(jsx.isFunction(function(){})); // true
+```
+
+
+isPlainObject
+----------
+2020-04-03
+
+Returns whether the given parameter is a plain object.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.isPlainObject({"name": "boris"})); // true
+console.log(jsx.isPlainObject(["boris"])); // false
+console.log(jsx.isPlainObject(function(){})); // false
+```
+
+
 mimeIsImage
 ----------
 2020-04-02
@@ -90,6 +139,10 @@ console.log(jsx.startsWith("attention please", "please")); // false
 History Log
 =============
 
+- 1.4.0 -- 2020-04-03
+
+    - add isPlainObject, isArray, isFunction functions
+    
 - 1.3.0 -- 2020-04-02
 
     - add startsWith function
