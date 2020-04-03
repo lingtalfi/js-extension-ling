@@ -112,3 +112,10 @@ console.log(jsx.objectToQueryString({
 
 console.log(jsx.objectToQueryString({name: "boris"})); // name=boris
 
+console.log(jsx.getFileExtension("index.html")); // html
+console.log(jsx.getFileExtension("index.coffee.md")); // md
+console.log(jsx.getFileExtension("index.")); // <emptyString>
+console.log(jsx.getFileExtension("index")); // <emptyString>
+console.log(jsx.getFileExtension(".index")); // index
+console.log(jsx.getFileExtension(".index.md")); // md
+

@@ -88,6 +88,27 @@ console.log(jsx.extend(true, object1, object2, object3));
 
 
 
+getFileExtension
+----------
+2020-04-03
+
+Returns the file extension of the given path.
+
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.getFileExtension("index.html")); // html
+console.log(jsx.getFileExtension("index.coffee.md")); // md
+console.log(jsx.getFileExtension("index.")); // <emptyString>
+console.log(jsx.getFileExtension("index")); // <emptyString>
+console.log(jsx.getFileExtension(".index")); // index
+console.log(jsx.getFileExtension(".index.md")); // md
+```
+
+
+
 humanSize
 ----------
 2020-04-02
@@ -352,6 +373,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.10.0 -- 2020-04-03
+
+    - add getFileExtension function, fix post wrong inner references
+    
 - 1.9.0 -- 2020-04-03
 
     - add post function

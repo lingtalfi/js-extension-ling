@@ -55,6 +55,14 @@ var jsx = {
     },
 
 
+
+    getFileExtension: function(path){
+        if(false === this.str_contains(path, ".")){
+            return "";
+        }
+        return path.split('.').pop();
+    },
+
     // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     humanSize: function (bytes, decimals) {
         if (0 === bytes) {
@@ -121,7 +129,7 @@ var jsx = {
         var body = null;
         if (payload instanceof FormData) {
             body = payload;
-        } else if (jsx.isPlainObject(payload)) {
+        } else if (this.isPlainObject(payload)) {
 
             if (
                 true === payload.hasOwnProperty("post") &&
@@ -133,8 +141,8 @@ var jsx = {
                 var get = payload.get;
                 var files = payload.files;
 
-                if (false === jsx.isEmptyObject(get)) {
-                    url = jsx.url_merge_params(url, get);
+                if (false === this.isEmptyObject(get)) {
+                    url = this.url_merge_params(url, get);
                 }
 
                 body = new FormData();
