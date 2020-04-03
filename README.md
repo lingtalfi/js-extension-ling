@@ -221,6 +221,53 @@ console.log(jsx.objectToQueryString({name: "boris"})); // name=boris
 
 
 
+post
+----------
+2020-04-03
+
+An asynchronous wrapper around fetch that posts data so that you can access them via $_POST, $_FILES (and $_GET) in a php server.
+
+It accepts two arguments:
+
+- url
+- payload
+
+
+The payload argument can be many things:
+
+- a js FormData
+- a plain object (aka map) containing key/value pairs (will be passed via POST).
+- a mixed object containing the following properties (all 3 must be declared, even if empty):
+     - post: the map to send to $_POST
+     - get: the map to send to $_GET
+     - files: the map to send to $_FILES, it's a map of name => File (js object)
+
+
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+
+
+
+
+async function callService(params) {
+    var response = await jsx.post("/some-service.php", params).catch(data => {
+        console.log( "An error occurred with the request.", data); // throw an error...
+    });
+
+    if (true === response.ok) {
+        return await response.json();
+    } else {
+        console.log("The server status code was " + response.status); // throw an error...
+    }
+
+}
+```
+
+
+
 startsWith
 ----------
 2020-04-02
@@ -305,6 +352,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.9.0 -- 2020-04-03
+
+    - add post function
+    
 - 1.8.0 -- 2020-04-03
 
     - add objectToQueryString and url_merge_params functions

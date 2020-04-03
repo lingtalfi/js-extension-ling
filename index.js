@@ -93,6 +93,77 @@ var jsx = {
         }
         return true;
     },
+    objectToQueryString: function (obj, encodeParams) {
+        return this._serialize(obj, encodeParams);
+    },
+
+    /**
+     * An asynchronous wrapper around fetch that posts data so that you can access them via $_POST, $_FILES (and $_GET) in a php server.
+     *
+     * The payload argument can be many things:
+     *
+     * - a js FormData
+     * - a plain object (aka map) containing key/value pairs (will be passed via POST).
+     * - a mixed object containing the following properties (all 3 must be declared, even if empty):
+     *      - post: the map to send to $_POST
+     *      - get: the map to send to $_GET
+     *      - files: the map to send to $_FILES, it's a map of name => File (js object)
+     *
+     *
+     *
+     * @param url
+     * @param payload
+     * @returns {Promise<Response>}
+     */
+    async post(url, payload) {
+
+
+        var body = null;
+        if (payload instanceof FormData) {
+            body = payload;
+        } else if (jsx.isPlainObject(payload)) {
+
+            if (
+                true === payload.hasOwnProperty("post") &&
+                true === payload.hasOwnProperty("get") &&
+                true === payload.hasOwnProperty("files")
+            ) {
+
+                var post = payload.post;
+                var get = payload.get;
+                var files = payload.files;
+
+                if (false === jsx.isEmptyObject(get)) {
+                    url = jsx.url_merge_params(url, get);
+                }
+
+                body = new FormData();
+                for (let i in post) {
+                    body.append(i, post[i]);
+                }
+                for (let i in files) {
+                    body.append(i, files[i]);
+                }
+
+            } else {
+                body = new FormData();
+                for (let i in payload) {
+                    body.append(i, payload[i]);
+                }
+            }
+        } else {
+            console.error(payload);
+            throw new Error("Unknown payload case.");
+        }
+
+
+        return await fetch(url, {
+            method: "POST",
+            body: body,
+        });
+    },
+
+
     startsWith: function (haystack, needle) {
         return haystack.substring(0, needle.length) === needle;
     },
@@ -102,9 +173,7 @@ var jsx = {
         return haystack.indexOf(needle) !== -1;
     },
 
-    objectToQueryString: function (obj, encodeParams) {
-        return this._serialize(obj, encodeParams);
-    },
+
 
     url_merge_params: function (url, params, encodeParams = true) {
         var q = this.objectToQueryString(params, encodeParams);
