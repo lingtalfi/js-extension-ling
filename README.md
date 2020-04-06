@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-03
+2020-04-02 -> 2020-04-06
 
 A js helper library.
 
@@ -461,43 +461,41 @@ $(document).ready(function () {
 
     var jImage = $('#theimage');
     var jInput = $('#theinput');
-    var options = {
-        onError: (e) => {},
-        onAbort: (e) => {},
-    };
 
 
-
-    jInput.on("change", function (e) {
+    jInput.on("change", async function (e) {
 
         let data = {
             firstName: "paul",
             file: this.files[0],
         };
 
-        jsx.uploadFileProgress("/test-server.php", data, (e, percent, loaded, total) => {
+        var ajax = await jsx.uploadFileProgress("/test-server.php", data, (e, percent, loaded, total) => {
             console.log("file uploading", percent);
 
-        }, ajax => {
+        });
 
-            /**
-             * Note: in this case the server responds with a json response, and the file property of the response
-             * contains the file binary data encoded in base64 (otherwise it could break the json string).
-             */
-            let jsonResponse = JSON.parse(ajax.response);
-            var blob = jsx.b64toBlob(jsonResponse.file);
-            var url = URL.createObjectURL(blob);
 
+        /**
+         * Note: in this case the server responds with a json response, and the file property of the response
+         * contains the file binary data encoded in base64 (otherwise it could break the json string).
+         */
+        let jsonResponse = JSON.parse(ajax.response);
+        var blob = jsx.b64toBlob(jsonResponse.file);
+        var url = URL.createObjectURL(blob);
+
+
+        setTimeout(() => {
 
             console.log(blob);
             console.log(url);
 
             jImage.attr('src', url);
-            
+        }, 2000);
 
 
-        });
-    }, options);
+    });
+});
 ```
 
 
@@ -550,6 +548,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.15.0 -- 2020-04-06
+
+    - update uploadFileProgress function to work with async/await
+    
 - 1.14.0 -- 2020-04-06
 
     - add b64toBlob and uploadFileProgress functions

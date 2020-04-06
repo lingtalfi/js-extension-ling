@@ -246,55 +246,62 @@ var jsx = {
      * for upload progress monitoring yet (at least not that I know of), so this method uses
      * the older XMLHttpRequest api.
      */
-    uploadFileProgress: function (url, data, onProgress, onSuccess, options) {
-        let formdata;
+    uploadFileProgress: async function (url, data, onProgress) {
 
-        if (data instanceof FormData) {
-            formdata = data;
-        } else {
-            formdata = new FormData();
-            for (let i in data) {
-                formdata.append(i, data[i]);
+
+        return new Promise((resolve, reject) => {
+
+
+            let formdata;
+
+            if (data instanceof FormData) {
+                formdata = data;
+            } else {
+                formdata = new FormData();
+                for (let i in data) {
+                    formdata.append(i, data[i]);
+                }
             }
-        }
 
 
-        var ajax = new XMLHttpRequest();
-        // ajax.overrideMimeType("application/json");
+            var ajax = new XMLHttpRequest();
+            // ajax.overrideMimeType("application/json");
 
-        ajax.upload.addEventListener("progress", function (e) {
-            var percent = Math.round((e.loaded / e.total) * 100, 2);
-            onProgress(e, percent, e.loaded, e.total);
-        }, false);
-
-
-        ajax.addEventListener("load", function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }, false);
-        ajax.addEventListener("error", function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            if ("onError" in options) {
-                options.onError(e);
-            }
-        }, false);
-        ajax.addEventListener("abort", function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-            if ("onAbort" in options) {
-                options.onAbort(e);
-            }
-        }, false);
+            ajax.upload.addEventListener("progress", function (e) {
+                var percent = Math.round((e.loaded / e.total) * 100, 2);
+                onProgress(e, percent, e.loaded, e.total);
+            }, false);
 
 
-        ajax.open("POST", url);
-        ajax.onreadystatechange = function () {
-            if (ajax.readyState === 4) {
-                onSuccess(ajax);
-            }
-        };
-        ajax.send(formdata);
+            ajax.addEventListener("load", function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }, false);
+            ajax.addEventListener("error", function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if ("onError" in options) {
+                    reject(e);
+                }
+            }, false);
+            ajax.addEventListener("abort", function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if ("onAbort" in options) {
+                    reject(e);
+                }
+            }, false);
+
+
+            ajax.open("POST", url);
+            ajax.onreadystatechange = function () {
+                if (ajax.readyState === 4) {
+                    resolve(ajax);
+                }
+            };
+            ajax.send(formdata);
+
+        });
     },
 
 
