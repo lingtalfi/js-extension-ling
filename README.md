@@ -461,6 +461,11 @@ $(document).ready(function () {
 
     var jImage = $('#theimage');
     var jInput = $('#theinput');
+    var options = {
+        onError: (e) => {},
+        onAbort: (e) => {},
+    };
+
 
 
     jInput.on("change", function (e) {
@@ -492,7 +497,7 @@ $(document).ready(function () {
 
 
         });
-    });
+    }, options);
 ```
 
 
