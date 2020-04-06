@@ -37,6 +37,17 @@ console.log(jsx.arrayKeyExists(1, ["paul", "alice"])); // true
 ```
 
 
+b64toBlob
+----------
+2020-04-06
+
+Returns a blob from a base64 encoded string.
+
+Example: see the **uploadFileProgress** method for a concrete example.
+
+
+
+
 basename
 ----------
 2020-04-03
@@ -410,6 +421,54 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 
 
 
+uploadFileProgress
+----------
+2020-04-06
+
+Uploads a file and tracks the upload progress.
+
+Example (using a context with jquery available):
+
+```js
+const jsx = require("js-extension-ling");
+$(document).ready(function () {
+
+
+    var jImage = $('#theimage');
+    var jInput = $('#theinput');
+
+
+    jInput.on("change", function (e) {
+
+        let data = {
+            firstName: "paul",
+            file: this.files[0],
+        };
+
+        jsx.uploadFileProgress("/test-server.php", data, (e, percent, loaded, total) => {
+            console.log("file uploading", percent);
+
+        }, ajax => {
+
+            /**
+             * Note: in this case the server responds with a json response, and the file property of the response
+             * contains the file binary data encoded in base64 (otherwise it could break the json string).
+             */
+            let jsonResponse = JSON.parse(ajax.response);
+            var blob = jsx.b64toBlob(jsonResponse.file);
+            var url = URL.createObjectURL(blob);
+
+
+            console.log(blob);
+            console.log(url);
+
+            jImage.attr('src', url);
+            
+
+
+        });
+    });
+```
 
 
 url_merge_params
@@ -461,6 +520,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.14.0 -- 2020-04-06
+
+    - add b64toBlob and uploadFileProgress functions
+    
 - 1.13.0 -- 2020-04-06
 
     - add arrayKeyExists and inArray functions

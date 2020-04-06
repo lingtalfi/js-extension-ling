@@ -5,6 +5,33 @@ var jsx = {
         return (key in object);
     },
 
+
+    //https://gist.github.com/jdnichollsc/78a6eb093731cf3e8dfd536dbe4befb3
+    b64toBlob: function (b64Data, contentType, sliceSize) {
+        contentType = contentType || 'image/png';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    },
+
+
     basename: function (path) {
         return path.split(/[\\/]/).pop();
     },
@@ -212,6 +239,64 @@ var jsx = {
     str_contains: function (haystack, needle) {
         return haystack.indexOf(needle) !== -1;
     },
+
+
+    /**
+     * Note: at the time of writing (2020-04-06), the growing fetch api doesn't have a support
+     * for upload progress monitoring yet (at least not that I know of), so this method uses
+     * the older XMLHttpRequest api.
+     */
+    uploadFileProgress: function (url, data, onProgress, onSuccess, options) {
+        let formdata;
+
+        if (data instanceof FormData) {
+            formdata = data;
+        } else {
+            formdata = new FormData();
+            for (let i in data) {
+                formdata.append(i, data[i]);
+            }
+        }
+
+
+        var ajax = new XMLHttpRequest();
+        // ajax.overrideMimeType("application/json");
+
+        ajax.upload.addEventListener("progress", function (e) {
+            var percent = Math.round((e.loaded / e.total) * 100, 2);
+            onProgress(e, percent, e.loaded, e.total);
+        }, false);
+
+
+        ajax.addEventListener("load", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }, false);
+        ajax.addEventListener("error", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if ("onError" in options) {
+                options.onError(e);
+            }
+        }, false);
+        ajax.addEventListener("abort", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if ("onAbort" in options) {
+                options.onAbort(e);
+            }
+        }, false);
+
+
+        ajax.open("POST", url);
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState === 4) {
+                onSuccess(ajax);
+            }
+        };
+        ajax.send(formdata);
+    },
+
 
     url_merge_params: function (url, params, encodeParams = true) {
         var q = this.objectToQueryString(params, encodeParams);
