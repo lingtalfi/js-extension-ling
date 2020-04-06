@@ -16,8 +16,33 @@ npm install js-extension-ling
 
 
 
-Functions
+Functions summary
 ===========
+
+* [arrayKeyExists](#arraykeyexists)
+* [b64toBlob](#b64toblob)
+* [basename](#basename)
+* [dirname](#dirname)
+* [escapeHtml](#escapehtml)
+* [extend](#extend)
+* [getFileExtension](#getfileextension)
+* [humanSize](#humansize)
+* [inArray](#inarray)
+* [isArray](#isarray)
+* [isEmptyObject](#isemptyobject)
+* [isFunction](#isfunction)
+* [isPlainObject](#isplainobject)
+* [mimeIsImage](#mimeisimage)
+* [objectToQueryString](#objecttoquerystring)
+* [post](#post)
+* [reindex](#reindex)
+* [startsWith](#startswith)
+* [str_contains](#str_contains)
+* [uploadFileProgress](#uploadfileprogress)
+* [url_merge_params](#url_merge_params)
+
+
+
 
 
 arrayKeyExists
