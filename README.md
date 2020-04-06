@@ -19,6 +19,24 @@ npm install js-extension-ling
 Functions
 ===========
 
+
+arrayKeyExists
+----------
+2020-04-06
+
+Returns whether the given key is part a key of the given object.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.arrayKeyExists("name", {"name": "paul"})); // true
+console.log(jsx.arrayKeyExists("age", {"name": "paul"})); // false
+console.log(jsx.arrayKeyExists(1, ["paul"])); // false
+console.log(jsx.arrayKeyExists(1, ["paul", "alice"])); // true
+```
+
+
 basename
 ----------
 2020-04-03
@@ -155,6 +173,23 @@ Example:
 ```js
 const jsx = require("js-extension-ling");
 console.log(jsx.humanSize(5000)); // 4.88 KB
+```
+
+
+
+
+inArray
+----------
+2020-04-06
+
+Returns whether the given string is an element of the given array.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.inArray("paul", ["paul", "alice"])); // true
+console.log(jsx.inArray("boris", ["paul", "alice"])); // false
 ```
 
 
@@ -426,6 +461,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.13.0 -- 2020-04-06
+
+    - add arrayKeyExists and inArray functions
+    
 - 1.12.0 -- 2020-04-03
 
     - add basename and dirname functions

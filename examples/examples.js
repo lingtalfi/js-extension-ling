@@ -137,5 +137,14 @@ console.log(jsx.dirname("top")); // top
 console.log(jsx.dirname("autumn/top///")); // autumn/top
 
 
+console.log(jsx.arrayKeyExists("name", {"name": "paul"})); // true
+console.log(jsx.arrayKeyExists("age", {"name": "paul"})); // false
+console.log(jsx.arrayKeyExists(1, ["paul"])); // false
+console.log(jsx.arrayKeyExists(1, ["paul", "alice"])); // true
+console.log(jsx.inArray("paul", ["paul", "alice"])); // true
+console.log(jsx.inArray("boris", ["paul", "alice"])); // false
+
+
+
 
 

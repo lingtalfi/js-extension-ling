@@ -1,6 +1,10 @@
 var jsx = {
 
 
+    arrayKeyExists: function (key, object) {
+        return (key in object);
+    },
+
     basename: function (path) {
         return path.split(/[\\/]/).pop();
     },
@@ -86,7 +90,15 @@ var jsx = {
         return parseFloat((bytes / Math.pow(c, f)).toFixed(d)) + " " + e[f]
     },
 
-
+    inArray: function (needle, haystack) {
+        var length = haystack.length;
+        for (var i = 0; i < length; i++) {
+            if (needle === haystack[i]) {
+                return true;
+            }
+        }
+        return false;
+    },
     isArray: function (thing) {
         return '[object Array]' === Object.prototype.toString.call(thing);
     },
