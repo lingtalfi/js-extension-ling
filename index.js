@@ -246,7 +246,7 @@ var jsx = {
      * for upload progress monitoring yet (at least not that I know of), so this method uses
      * the older XMLHttpRequest api.
      */
-    uploadFileProgress: async function (url, data, onProgress) {
+    uploadFileProgress: async function (url, data, onProgress, decorator) {
 
 
         return new Promise((resolve, reject) => {
@@ -266,6 +266,10 @@ var jsx = {
 
             var ajax = new XMLHttpRequest();
             // ajax.overrideMimeType("application/json");
+
+            if (this.isFunction(decorator)) {
+                decorator(ajax);
+            }
 
             ajax.upload.addEventListener("progress", function (e) {
                 var percent = Math.round((e.loaded / e.total) * 100, 2);

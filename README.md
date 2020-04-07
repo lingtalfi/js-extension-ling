@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-06
+2020-04-02 -> 2020-04-07
 
 A js helper library.
 
@@ -448,7 +448,7 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 
 uploadFileProgress
 ----------
-2020-04-06
+2020-04-06 -> 2020-04-07
 
 Uploads a file and tracks the upload progress.
 
@@ -472,8 +472,11 @@ $(document).ready(function () {
 
         var ajax = await jsx.uploadFileProgress("/test-server.php", data, (e, percent, loaded, total) => {
             console.log("file uploading", percent);
-
-        });
+        }, _ajax => {
+            // decorate your ajax object here if necessary... below is just fictional use of this decorator function 
+              _ajax.overrideMimeType("application/json"); 
+             // _ajax.responseType = 'blob'; 
+         });
 
 
         /**
@@ -548,6 +551,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.16.0 -- 2020-04-07
+
+    - update uploadFileProgress function now has decorator argument
+    
 - 1.15.0 -- 2020-04-06
 
     - update uploadFileProgress function to work with async/await
