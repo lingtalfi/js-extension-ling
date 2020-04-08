@@ -246,6 +246,10 @@ var jsx = {
     },
 
 
+    toBool: function (thing) {
+        return !!thing;
+    },
+
     /**
      * Note: at the time of writing (2020-04-06), the growing fetch api doesn't have a support
      * for upload progress monitoring yet (at least not that I know of), so this method uses

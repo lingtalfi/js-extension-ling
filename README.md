@@ -39,6 +39,7 @@ Functions summary
 * [reindex](#reindex)
 * [startsWith](#startswith)
 * [str_contains](#str_contains)
+* [toBool](#tobool)
 * [uploadFileProgress](#uploadfileprogress)
 * [url_merge_params](#url_merge_params)
 
@@ -463,6 +464,28 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 ```
 
 
+toBool
+----------
+2020-04-08
+
+Returns the boolean version of the given thing. 
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.toBool(false)); // false
+console.log(jsx.toBool(true)); // true
+console.log(jsx.toBool(1)); // true
+console.log(jsx.toBool(0)); // false
+console.log(jsx.toBool(200)); // true
+console.log(jsx.toBool("anystring")); // true
+console.log(jsx.toBool("")); // false
+console.log(jsx.toBool("false")); // true
+console.log(jsx.toBool("true")); // true
+```
+
+
 
 uploadFileProgress
 ----------
@@ -569,6 +592,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.18.0 -- 2020-04-08
+
+    - add toBool function
+    
 - 1.17.0 -- 2020-04-08
 
     - add getRandomNumber function

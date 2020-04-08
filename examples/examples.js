@@ -146,6 +146,16 @@ console.log(jsx.inArray("boris", ["paul", "alice"])); // false
 console.log(jsx.getRandomNumber(1, 4)); // 3
 console.log(jsx.getRandomNumber(1, 4)); // 1
 
+console.log(jsx.toBool(false)); // false
+console.log(jsx.toBool(true)); // true
+console.log(jsx.toBool(1)); // true
+console.log(jsx.toBool(0)); // false
+console.log(jsx.toBool(200)); // true
+console.log(jsx.toBool("anystring")); // true
+console.log(jsx.toBool("")); // false
+console.log(jsx.toBool("false")); // true
+console.log(jsx.toBool("true")); // true
+
 
 
 
