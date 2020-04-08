@@ -143,6 +143,8 @@ console.log(jsx.arrayKeyExists(1, ["paul"])); // false
 console.log(jsx.arrayKeyExists(1, ["paul", "alice"])); // true
 console.log(jsx.inArray("paul", ["paul", "alice"])); // true
 console.log(jsx.inArray("boris", ["paul", "alice"])); // false
+console.log(jsx.getRandomNumber(1, 4)); // 3
+console.log(jsx.getRandomNumber(1, 4)); // 1
 
 
 

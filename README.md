@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-07
+2020-04-02 -> 2020-04-08
 
 A js helper library.
 
@@ -26,6 +26,7 @@ Functions summary
 * [escapeHtml](#escapehtml)
 * [extend](#extend)
 * [getFileExtension](#getfileextension)
+* [getRandomNumber](#getrandomnumber)
 * [humanSize](#humansize)
 * [inArray](#inarray)
 * [isArray](#isarray)
@@ -194,6 +195,23 @@ console.log(jsx.getFileExtension("index.")); // <emptyString>
 console.log(jsx.getFileExtension("index")); // <emptyString>
 console.log(jsx.getFileExtension(".index")); // index
 console.log(jsx.getFileExtension(".index.md")); // md
+```
+
+
+
+getRandomNumber
+----------
+2020-04-08
+
+Returns a random number between the given min and max (both included).
+
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.getRandomNumber(1, 4)); // 3
+console.log(jsx.getRandomNumber(1, 4)); // 1
 ```
 
 
@@ -551,6 +569,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.17.0 -- 2020-04-08
+
+    - add getRandomNumber function
+    
 - 1.16.0 -- 2020-04-07
 
     - update uploadFileProgress function now has decorator argument

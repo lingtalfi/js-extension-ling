@@ -107,6 +107,11 @@ var jsx = {
         return path.split('.').pop();
     },
 
+
+    getRandomNumber: function (min, max) {
+        return Math.floor(Math.random() * max) + min;
+    },
+
     // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     humanSize: function (bytes, decimals) {
         if (0 === bytes) {
