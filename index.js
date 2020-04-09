@@ -34,7 +34,7 @@ var jsx = {
 
     basename: function (path, returnExtension = true) {
         let basename = path.split(/[\\/]/).pop();
-        if(false === returnExtension){
+        if (false === returnExtension) {
             if (false === this.str_contains(basename, ".")) {
                 return basename;
             }
@@ -257,6 +257,18 @@ var jsx = {
 
     toBool: function (thing) {
         return !!thing;
+    },
+
+
+    toInt: function (thing) {
+        if (true === thing) {
+            return 1;
+        }
+        let res = parseInt(thing);
+        if (isNaN(res)) {
+            return 0;
+        }
+        return res;
     },
 
     /**

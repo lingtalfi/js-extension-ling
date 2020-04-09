@@ -40,6 +40,7 @@ Functions summary
 * [startsWith](#startswith)
 * [str_contains](#str_contains)
 * [toBool](#tobool)
+* [toInt](#toint)
 * [uploadFileProgress](#uploadfileprogress)
 * [url_merge_params](#url_merge_params)
 
@@ -497,6 +498,32 @@ console.log(jsx.toBool("true")); // true
 
 
 
+toInt
+----------
+2020-04-09
+
+Returns the integer version of the given thing. 
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.toInt("")); // 0
+console.log(jsx.toInt("123")); // 123
+console.log(jsx.toInt("123W")); // 123
+console.log(jsx.toInt("W123")); // 0
+console.log(jsx.toInt(".123")); // 0
+console.log(jsx.toInt("test")); // 0
+console.log(jsx.toInt(false)); // 0
+console.log(jsx.toInt(true)); // 1
+console.log(jsx.toInt([])); // 0
+console.log(jsx.toInt(["dd"])); // 0
+console.log(jsx.toInt({})); // 0
+console.log(jsx.toInt({a: 11})); // 0
+```
+
+
+
 uploadFileProgress
 ----------
 2020-04-06 -> 2020-04-07
@@ -602,6 +629,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.20.0 -- 2020-04-09
+
+    - add toInt function
+    
 - 1.19.0 -- 2020-04-09
 
     - update basename function now accepts returnExtension argument

@@ -165,6 +165,20 @@ console.log(jsx.toBool("false")); // true
 console.log(jsx.toBool("true")); // true
 
 
+console.log(jsx.toInt("")); // 0
+console.log(jsx.toInt("123")); // 123
+console.log(jsx.toInt("123W")); // 123
+console.log(jsx.toInt("W123")); // 0
+console.log(jsx.toInt(".123")); // 0
+console.log(jsx.toInt("test")); // 0
+console.log(jsx.toInt(false)); // 0
+console.log(jsx.toInt(true)); // 1
+console.log(jsx.toInt([])); // 0
+console.log(jsx.toInt(["dd"])); // 0
+console.log(jsx.toInt({})); // 0
+console.log(jsx.toInt({a: 11})); // 0
+
+
 
 
 
