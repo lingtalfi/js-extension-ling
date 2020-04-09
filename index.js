@@ -45,6 +45,41 @@ var jsx = {
         return basename;
     },
 
+
+    compareBlobs: async function (blob1, blob2, useTrick = true) {
+        if (blob1.size !== blob2.size) {
+            return false;
+        }
+
+        /**
+         * I use the trick below for performances sake.
+         * From my test, comparing a 172M file to itself without the trick took about 8 seconds,
+         * which was unacceptable for my needs.
+         * So with this trick, the comparison is almost instant.
+         *
+         *
+         * If the size is more than 1M (more than 1 million bytes), then
+         * it's likely than no difference in size means no difference in the blob,
+         * unless you create some kind of blocks of data that have exactly the same size, in which case this function
+         * might not be appropriate for your needs.
+         *
+         * My original case is a file uploader, I just want to see if the user has uploaded a different file or not.
+         *
+         *
+         *
+         */
+        if (true === useTrick) {
+            if (blob1.size > 1024 * 1024) {
+                return true;
+            }
+        }
+
+
+        let buffer = await blob1.arrayBuffer();
+        let buffer2 = await blob2.arrayBuffer();
+        return this._compareBuffers(buffer, buffer2);
+    },
+
     // adapted from https://locutus.io/php/filesystem/dirname/
     dirname: function (path) {
         var ret = path.replace(/\\/g, '/').replace(/\/[^/]*\/?$/, '');
@@ -394,6 +429,23 @@ var jsx = {
         console.log(Object.prototype.toString.call(true)); // [object Boolean]
         console.log(Object.prototype.toString.call(null)); // [object Null]
         console.log(Object.prototype.toString.call()); // [object Undefined]
+    },
+
+    _compareBuffers: function (buf1, buf2) {
+        if (buf1 === buf2) {
+            return true;
+        }
+        if (buf1.byteLength !== buf2.byteLength) {
+            return false;
+        }
+        const d1 = new DataView(buf1), d2 = new DataView(buf2);
+        var i = buf1.byteLength;
+        while (i--) {
+            if (d1.getUint8(i) !== d2.getUint8(i)) {
+                return false;
+            }
+        }
+        return true;
     },
 };
 

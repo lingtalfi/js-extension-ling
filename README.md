@@ -22,6 +22,7 @@ Functions summary
 * [arrayKeyExists](#arraykeyexists)
 * [b64toBlob](#b64toblob)
 * [basename](#basename)
+* [compareBlobs](#compareblobs)
 * [dirname](#dirname)
 * [escapeHtml](#escapehtml)
 * [extend](#extend)
@@ -102,6 +103,38 @@ console.log(jsx.basename("/hello/world.com", false)); // world
 console.log(jsx.basename("/hello/world.com.net", false)); // world.com
 ```
 
+
+compareBlobs
+----------
+2020-04-09
+
+Compares whether the two given blobs are identical.
+For performances reasons, the size is used by default if the blob size
+is more than 1M (set useTrick argument to false to do byte by byte 
+comparison).
+
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+
+async function go() {
+    let url = "/tmp/00076.MTS";
+    let url2 = "/tmp/00077.MTS";
+    let response = await fetch(url);
+    let response2 = await fetch(url2);
+
+
+    let blob = await response.blob();
+    let blob2 = await response2.blob();
+    let res = await jsx.compareBlobs(blob, blob2);
+
+    console.log(res); // true if the blobs are the same (i.e. 76 is a copy of 77 in my example), false otherwise
+}
+
+go();
+```
 
 dirname
 ----------
@@ -629,6 +662,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.21.0 -- 2020-04-09
+
+    - add compareBlobs function
+    
 - 1.20.0 -- 2020-04-09
 
     - add toInt function
