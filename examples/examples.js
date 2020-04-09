@@ -128,6 +128,14 @@ console.log(jsx.basename("/")); // <emptyString>
 console.log(jsx.basename("/hello")); // hello
 console.log(jsx.basename("/hello/world")); // world
 console.log(jsx.basename("/hello/world.com")); // world.com
+console.log(jsx.basename("/hello/world.com.net")); // world.com.net
+
+console.log(jsx.basename("/", false)); // <emptyString>
+console.log(jsx.basename("/hello", false)); // hello
+console.log(jsx.basename("/hello/world", false)); // world
+console.log(jsx.basename("/hello/world.com", false)); // world
+console.log(jsx.basename("/hello/world.com.net", false)); // world.com
+
 
 
 console.log(jsx.dirname("/etc/passwd")); // /etc

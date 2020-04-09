@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-08
+2020-04-02 -> 2020-04-09
 
 A js helper library.
 
@@ -77,9 +77,13 @@ Example: see the **uploadFileProgress** method for a concrete example.
 
 basename
 ----------
-2020-04-03
+2020-04-03 -> 2020-04-09
 
 Returns the last of the (forward) slash separated components in the given path.
+
+The second argument (returnExtension) is set to true by default. If set to false, it returns the basename
+without the last file extension (if any).
+
 
 Example:
 
@@ -89,6 +93,12 @@ console.log(jsx.basename("/")); // <emptyString>
 console.log(jsx.basename("/hello")); // hello
 console.log(jsx.basename("/hello/world")); // world
 console.log(jsx.basename("/hello/world.com")); // world.com
+
+console.log(jsx.basename("/", false)); // <emptyString>
+console.log(jsx.basename("/hello", false)); // hello
+console.log(jsx.basename("/hello/world", false)); // world
+console.log(jsx.basename("/hello/world.com", false)); // world
+console.log(jsx.basename("/hello/world.com.net", false)); // world.com
 ```
 
 
@@ -592,6 +602,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.19.0 -- 2020-04-09
+
+    - update basename function now accepts returnExtension argument
+    
 - 1.18.0 -- 2020-04-08
 
     - add toBool function

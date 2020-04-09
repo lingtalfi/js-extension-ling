@@ -32,8 +32,17 @@ var jsx = {
     },
 
 
-    basename: function (path) {
-        return path.split(/[\\/]/).pop();
+    basename: function (path, returnExtension = true) {
+        let basename = path.split(/[\\/]/).pop();
+        if(false === returnExtension){
+            if (false === this.str_contains(basename, ".")) {
+                return basename;
+            }
+            let p = basename.split('.');
+            p.pop();
+            return p.join(".");
+        }
+        return basename;
     },
 
     // adapted from https://locutus.io/php/filesystem/dirname/
