@@ -144,6 +144,22 @@ var jsx = {
     },
 
 
+
+    fetchBlob: async function (url) {
+        let response = await fetch(url);
+        if (false === response.ok) {
+            throw new Error(`Unexpected response with status ${response.status}: ${response.statusText}.`);
+        }
+        return await response.blob();
+    },
+    fetchJson: async function (url) {
+        let response = await fetch(url);
+        if (false === response.ok) {
+            throw new Error(`Unexpected response with status ${response.status}: ${response.statusText}.`);
+        }
+        return await response.json();
+    },
+
     getFileExtension: function (path) {
         if (false === this.str_contains(path, ".")) {
             return "";

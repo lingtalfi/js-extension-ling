@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-09
+2020-04-02 -> 2020-04-10
 
 A js helper library.
 
@@ -26,6 +26,8 @@ Functions summary
 * [dirname](#dirname)
 * [escapeHtml](#escapehtml)
 * [extend](#extend)
+* [fetchBlob](#fetchblob)
+* [fetchJson](#fetchjson)
 * [getFileExtension](#getfileextension)
 * [getRandomNumber](#getrandomnumber)
 * [humanSize](#humansize)
@@ -220,6 +222,51 @@ console.log(jsx.extend(true, object1, object2, object3));
  */
 ```
 
+
+
+
+fetchBlob
+----------
+2020-04-10
+
+Returns a promise resolving to a blob.
+Throws an exception if either:
+- there is a network error
+- the http status is not ok (ie. fetch response.ok=false)
+- the blob could not be created correctly
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+async function go() {
+    let blob = await jsx.getBlob("https://someurl.com");
+    console.log(blob);
+}
+go();
+```
+
+
+fetchJson
+----------
+2020-04-10
+
+Returns a promise resolving to a blob.
+Throws an exception if either:
+- there is a network error
+- the http status is not ok (ie. fetch response.ok=false)
+- the json data could not be retrieved correctly
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+async function go() {
+    let json = await jsx.getJson("https://someurl.com");
+    console.log(json);
+}
+go();
+```
 
 
 
@@ -662,6 +709,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.22.0 -- 2020-04-10
+
+    - add fetchBlob and fetchJson functions
+    
 - 1.21.0 -- 2020-04-09
 
     - add compareBlobs function
