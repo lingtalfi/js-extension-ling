@@ -709,6 +709,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.23.0 -- 2020-04-10
+
+    - update fetchBlob and fetchJson functions, add fetchInit parameter
+    
 - 1.22.0 -- 2020-04-10
 
     - add fetchBlob and fetchJson functions

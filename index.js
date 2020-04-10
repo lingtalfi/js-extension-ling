@@ -144,16 +144,15 @@ var jsx = {
     },
 
 
-
-    fetchBlob: async function (url) {
-        let response = await fetch(url);
+    fetchBlob: async function (url, fetchInit = {}) {
+        let response = await fetch(url, fetchInit);
         if (false === response.ok) {
             throw new Error(`Unexpected response with status ${response.status}: ${response.statusText}.`);
         }
         return await response.blob();
     },
-    fetchJson: async function (url) {
-        let response = await fetch(url);
+    fetchJson: async function (url, fetchInit = {}) {
+        let response = await fetch(url, fetchInit);
         if (false === response.ok) {
             throw new Error(`Unexpected response with status ${response.status}: ${response.statusText}.`);
         }
