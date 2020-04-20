@@ -1,6 +1,5 @@
 var jsx = {
 
-
     arrayKeyExists: function (key, object) {
         return (key in object);
     },
@@ -309,6 +308,34 @@ var jsx = {
         return !!thing;
     },
 
+    /**
+     * Note: this function requires a environment with the FormData object
+     * available (i.e. a web browser) to work properly.
+     */
+    toFormData: function (obj, fd = null) {
+
+        if (null === fd) {
+            fd = new FormData();
+        }
+
+        // https://stackoverflow.com/questions/22783108/convert-js-object-to-form-data
+        let toFormData = (f => f(f))(h => f => f(x => h(h)(f)(x)))(f => fd => pk => d => {
+            if (d instanceof Object) {
+                Object.keys(d).forEach(k => {
+                    const v = d[k]
+                    if (pk) k = `${pk}[${k}]`
+                    if (v instanceof Object && !(v instanceof Date) && !(v instanceof File)) {
+                        return f(fd)(k)(v)
+                    } else {
+                        fd.append(k, v)
+                    }
+                })
+            }
+            return fd
+        })(fd)();
+
+        return toFormData(obj);
+    },
 
     toInt: function (thing) {
         if (true === thing) {
@@ -405,7 +432,7 @@ var jsx = {
     //----------------------------------------
     // PRIVATE
     //----------------------------------------
-    // adaoted from https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+    // adapted from https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
     _serialize: function (obj, useEncoder, prefix) {
         var str = [],
             p;

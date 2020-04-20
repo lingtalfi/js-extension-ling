@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-10
+2020-04-02 -> 2020-04-20
 
 A js helper library.
 
@@ -43,6 +43,7 @@ Functions summary
 * [startsWith](#startswith)
 * [str_contains](#str_contains)
 * [toBool](#tobool)
+* [toFormData](#toformdata)
 * [toInt](#toint)
 * [uploadFileProgress](#uploadfileprogress)
 * [url_merge_params](#url_merge_params)
@@ -578,6 +579,88 @@ console.log(jsx.toBool("true")); // true
 
 
 
+
+toFormData
+----------
+2020-04-20
+
+Appends all the object properties recursively to a new FormData instance
+(or you can provide yours) and returns the form data. 
+
+This only work in a web environment (i.e. FormData object must exist).
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+let data = {
+    name: 'John',
+    age: 30,
+    colors: ['red', 'green', 'blue', {others: ["purple", "orange"]}],
+    children: [
+        {name: 'Max', age: 3},
+        {
+            name: 'Madonna', age: 10, car: {
+                type: "sonovex",
+                color: "black",
+            }
+        },
+    ],
+};
+
+
+let formData = jsx.toFormData(data);
+new Response(formData).text().then(console.log); // weird trick to visualize form data
+```
+
+Will output something like this:
+
+```http
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="name"
+John
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="age"
+30
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="colors[0]"
+red
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="colors[1]"
+green
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="colors[2]"
+blue
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="colors[3][others][0]"
+purple
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="colors[3][others][1]"
+orange
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="children[0][name]"
+Max
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="children[0][age]"
+3
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="children[1][name]"
+Madonna
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="children[1][age]"
+10
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="children[1][car][type]"
+sonovex
+-----------------------------18415226835494593972830870492
+Content-Disposition: form-data; name="children[1][car][color]"
+black
+-----------------------------18415226835494593972830870492--
+```
+
+
+
+
 toInt
 ----------
 2020-04-09
@@ -709,6 +792,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.24.0 -- 2020-04-20
+
+    - add toFormData function
+    
 - 1.23.0 -- 2020-04-10
 
     - update fetchBlob and fetchJson functions, add fetchInit parameter
