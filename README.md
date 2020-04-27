@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-20
+2020-04-02 -> 2020-04-27
 
 A js helper library.
 
@@ -40,6 +40,7 @@ Functions summary
 * [objectToQueryString](#objecttoquerystring)
 * [post](#post)
 * [reindex](#reindex)
+* [removeEntryByIndex](#removeentrybyindex)
 * [startsWith](#startswith)
 * [str_contains](#str_contains)
 * [toBool](#tobool)
@@ -524,6 +525,29 @@ console.log(jsx.reindex(testArray)); // [ 'qwerty', 'asdfgh', 'zxcvbn' ]
 ```
 
 
+
+removeEntryByIndex
+----------
+2020-04-27
+
+Removes the entry from the given array which corresponds to the given index,
+and re-indexes the array. 
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+
+let testArray = ["one", "two", "three"];
+delete testArray[1];
+console.log(testArray); // [ 'one', <1 empty item>, 'three' ]
+
+testArray = ["one", "two", "three"];
+jsx.removeEntryByIndex(testArray, 1);
+console.log(testArray); // [ 'one', 'three' ]
+```
+
+
 startsWith
 ----------
 2020-04-02
@@ -792,6 +816,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.25.0 -- 2020-04-27
+
+    - add removeEntryByIndex function
+    
 - 1.24.0 -- 2020-04-20
 
     - add toFormData function

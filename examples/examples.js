@@ -178,6 +178,14 @@ console.log(jsx.toInt(["dd"])); // 0
 console.log(jsx.toInt({})); // 0
 console.log(jsx.toInt({a: 11})); // 0
 
+testArray = ["one", "two", "three"];
+delete testArray[1];
+console.log(testArray); // [ 'one', <1 empty item>, 'three' ]
+
+testArray = ["one", "two", "three"];
+jsx.removeEntryByIndex(testArray, 1);
+console.log(testArray); // [ 'one', 'three' ]
+
 
 
 

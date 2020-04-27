@@ -294,6 +294,11 @@ var jsx = {
         });
     },
 
+
+    removeEntryByIndex: function (array, index) {
+        array.splice(index, 1);
+    },
+
     startsWith: function (haystack, needle) {
         return haystack.substring(0, needle.length) === needle;
     },
