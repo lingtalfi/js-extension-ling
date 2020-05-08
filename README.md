@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-04-27
+2020-04-02 -> 2020-05-08
 
 A js helper library.
 
@@ -23,6 +23,7 @@ Functions summary
 * [b64toBlob](#b64toblob)
 * [basename](#basename)
 * [compareBlobs](#compareblobs)
+* [cssId](#cssid)
 * [dirname](#dirname)
 * [escapeHtml](#escapehtml)
 * [extend](#extend)
@@ -139,6 +140,22 @@ async function go() {
 
 go();
 ```
+
+cssId
+----------
+2020-05-08
+
+Returns a random/"unique" css id.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+console.log(jsx.cssId()); // jsx-794194
+```
+
+
+
 
 dirname
 ----------
@@ -816,6 +833,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.26.0 -- 2020-05-08
+
+    - add cssId function
+    
 - 1.25.0 -- 2020-04-27
 
     - add removeEntryByIndex function

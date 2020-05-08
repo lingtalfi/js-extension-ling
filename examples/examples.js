@@ -187,6 +187,9 @@ jsx.removeEntryByIndex(testArray, 1);
 console.log(testArray); // [ 'one', 'three' ]
 
 
+console.log(jsx.cssId()); // jsx-794194
+
+
 
 
 

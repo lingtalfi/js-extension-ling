@@ -78,6 +78,9 @@ var jsx = {
         let buffer2 = await blob2.arrayBuffer();
         return this._compareBuffers(buffer, buffer2);
     },
+    cssId: function (prefix = 'jsx') {
+        return prefix + '-' + this.getRandomNumber(0, 1000000);
+    },
 
     // adapted from https://locutus.io/php/filesystem/dirname/
     dirname: function (path) {
