@@ -349,6 +349,9 @@ var jsx = {
         if (true === thing) {
             return 1;
         }
+        if (false === thing) {
+            return 0;
+        }
         let res = parseInt(thing);
         if (isNaN(res)) {
             return 0;

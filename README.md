@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-05-08
+2020-04-02 -> 2020-05-12
 
 A js helper library.
 
@@ -833,6 +833,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.26.1 -- 2020-05-12
+
+    - add explicit case handling for toInt with false
+    
 - 1.26.0 -- 2020-05-08
 
     - add cssId function
