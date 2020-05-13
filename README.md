@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-05-12
+2020-04-02 -> 2020-05-13
 
 A js helper library.
 
@@ -23,6 +23,7 @@ Functions summary
 * [b64toBlob](#b64toblob)
 * [basename](#basename)
 * [compareBlobs](#compareblobs)
+* [compareObjects](#compareobjects)
 * [cssId](#cssid)
 * [dirname](#dirname)
 * [escapeHtml](#escapehtml)
@@ -114,6 +115,8 @@ compareBlobs
 2020-04-09
 
 Compares whether the two given blobs are identical.
+Returns true if they are, false if they aren't.
+
 For performances reasons, the size is used by default if the blob size
 is more than 1M (set useTrick argument to false to do byte by byte 
 comparison).
@@ -139,6 +142,29 @@ async function go() {
 }
 
 go();
+```
+
+
+
+compareObjects
+----------
+2020-05-13
+
+Compares whether the two given objects are equivalent.
+Returns true if they are, false if they aren't.
+
+Equivalent means the have the same key/value pairs, the order is irrelevant.
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+
+console.log(jsx.compareObjects({},{})); // true
+console.log(jsx.compareObjects({a:1,b:2},{a:1,b:2})); // true
+console.log(jsx.compareObjects({a:1,b:2},{b:2,a:1})); // true
+console.log(jsx.compareObjects({a:1,b:2},{a:1,b:3})); // false
+console.log(jsx.compareObjects({a:1,b:2},{a:1})); // false
 ```
 
 cssId
@@ -833,6 +859,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.27.0 -- 2020-05-13
+
+    - add compareObjects function
+    
 - 1.26.1 -- 2020-05-12
 
     - add explicit case handling for toInt with false

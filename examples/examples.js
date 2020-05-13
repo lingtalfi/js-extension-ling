@@ -191,6 +191,9 @@ console.log(jsx.cssId()); // jsx-794194
 
 
 
-
-
+console.log(jsx.compareObjects({},{})); // true
+console.log(jsx.compareObjects({a:1,b:2},{a:1,b:2})); // true
+console.log(jsx.compareObjects({a:1,b:2},{b:2,a:1})); // true
+console.log(jsx.compareObjects({a:1,b:2},{a:1,b:3})); // false
+console.log(jsx.compareObjects({a:1,b:2},{a:1})); // false
 
