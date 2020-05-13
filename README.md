@@ -41,6 +41,7 @@ Functions summary
 * [mimeIsImage](#mimeisimage)
 * [objectToQueryString](#objecttoquerystring)
 * [post](#post)
+* [queryStringToObject](#querystringtoobject)
 * [reindex](#reindex)
 * [removeEntryByIndex](#removeentrybyindex)
 * [startsWith](#startswith)
@@ -550,6 +551,56 @@ async function callService(params) {
 
 
 
+queryStringToObject
+----------
+2020-05-13
+
+Takes either a query string or an url, and returns the corresponding parameters as a js object.
+ 
+
+Example:
+
+```js
+const jsx = require("js-extension-ling");
+
+console.log(jsx.queryStringToObject("a=1")); 
+console.log(jsx.queryStringToObject("a[]=1")); 
+console.log(jsx.queryStringToObject("a[]=1&a[]=pomme")); 
+console.log(jsx.queryStringToObject("a[0]=one&a[1]=five"));
+console.log(jsx.queryStringToObject("http://blabla?foo=bar&number=1234")); 
+console.log(jsx.queryStringToObject("a[fruits][red][]=strawberry"));
+console.log(jsx.queryStringToObject("a[fruits][red][]=strawberry&a[1]=five&a[fruits][red][]=cherry&a[fruits][yellow][]=lemon&a[fruits][yellow][688]=banana"));
+
+```
+
+This will output something like this:
+
+```bash
+{ a: '1' }
+{ a: { '0': '1' } }
+{ a: { '0': '1', '1': 'pomme' } }
+{ a: { '0': 'one', '1': 'five' } }
+{ foo: 'bar', number: '1234' }
+{
+  a: { fruits: { red: { '0': 'strawberry' } } }
+}
+{
+  a: {
+    '1': 'five',
+    fruits: {
+      red: { '0': 'strawberry', '1': 'cherry' },
+      yellow: { '0': 'lemon', '688': 'banana' }
+    }
+  }
+}
+
+```
+
+
+
+
+
+
 reindex
 ----------
 2020-04-03
@@ -859,6 +910,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.28.0 -- 2020-05-13
+
+    - add queryStringToObject function
+    
 - 1.27.1 -- 2020-05-13
 
     - fix post function not handling deep objects correctly

@@ -1,8 +1,10 @@
 const jsx = require("../index.js");
+const util = require('util')
 
 
 var func = function () {
 };
+
 
 console.log(jsx.humanSize(5000)); // 4.88 KB
 console.log(jsx.mimeIsImage("image/jpeg")); // true
@@ -137,7 +139,6 @@ console.log(jsx.basename("/hello/world.com", false)); // world
 console.log(jsx.basename("/hello/world.com.net", false)); // world.com
 
 
-
 console.log(jsx.dirname("/etc/passwd")); // /etc
 console.log(jsx.dirname("c:/Temp/x")); // c:/Temp
 console.log(jsx.dirname("/dir/test/")); // /dir
@@ -190,10 +191,36 @@ console.log(testArray); // [ 'one', 'three' ]
 console.log(jsx.cssId()); // jsx-794194
 
 
+console.log(jsx.compareObjects({}, {})); // true
+console.log(jsx.compareObjects({a: 1, b: 2}, {a: 1, b: 2})); // true
+console.log(jsx.compareObjects({a: 1, b: 2}, {b: 2, a: 1})); // true
+console.log(jsx.compareObjects({a: 1, b: 2}, {a: 1, b: 3})); // false
+console.log(jsx.compareObjects({a: 1, b: 2}, {a: 1})); // false
 
-console.log(jsx.compareObjects({},{})); // true
-console.log(jsx.compareObjects({a:1,b:2},{a:1,b:2})); // true
-console.log(jsx.compareObjects({a:1,b:2},{b:2,a:1})); // true
-console.log(jsx.compareObjects({a:1,b:2},{a:1,b:3})); // false
-console.log(jsx.compareObjects({a:1,b:2},{a:1})); // false
+
+console.log(jsx.queryStringToObject("a=1")); // { a: '1' }
+console.log(jsx.queryStringToObject("a[]=1")); // { a: { '0': '1' } }
+console.log(jsx.queryStringToObject("a[]=1&a[]=pomme")); // { a: { '0': '1', '1': 'pomme' } }
+console.log(jsx.queryStringToObject("a[0]=one&a[1]=five")); // { a: { '0': 'one', '1': 'five' } }
+console.log(jsx.queryStringToObject("http://blabla?foo=bar&number=1234")); // { foo: 'bar', number: '1234' }
+
+/**
+ {
+ a: { fruits: { red: { '0': 'strawberry' } } }
+}
+ */
+console.log(util.inspect(jsx.queryStringToObject("a[fruits][red][]=strawberry"), false, null, true));
+
+/**
+ {
+  a: {
+    '1': 'five',
+    fruits: {
+      red: { '0': 'strawberry', '1': 'cherry' },
+      yellow: { '0': 'lemon', '688': 'banana' }
+    }
+  }
+}
+ */
+console.log(util.inspect(jsx.queryStringToObject("a[fruits][red][]=strawberry&a[1]=five&a[fruits][red][]=cherry&a[fruits][yellow][]=lemon&a[fruits][yellow][688]=banana"), false, null, true));
 
