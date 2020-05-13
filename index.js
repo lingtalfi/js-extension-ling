@@ -314,18 +314,11 @@ var jsx = {
                 }
 
                 body = new FormData();
-                for (let i in post) {
-                    body.append(i, post[i]);
-                }
-                for (let i in files) {
-                    body.append(i, files[i]);
-                }
+                this.toFormData(post, body);
+                this.toFormData(files, body);
 
             } else {
-                body = new FormData();
-                for (let i in payload) {
-                    body.append(i, payload[i]);
-                }
+                body = this.toFormData(payload);
             }
         } else {
             console.error(payload);

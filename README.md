@@ -859,6 +859,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.27.1 -- 2020-05-13
+
+    - fix post function not handling deep objects correctly
+    
 - 1.27.0 -- 2020-05-13
 
     - add compareObjects function
