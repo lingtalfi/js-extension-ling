@@ -564,6 +564,7 @@ Example:
 const jsx = require("js-extension-ling");
 
 console.log(jsx.queryStringToObject("a=1")); 
+console.log(jsx.queryStringToObject("a=1&a=3")); 
 console.log(jsx.queryStringToObject("a[]=1")); 
 console.log(jsx.queryStringToObject("a[]=1&a[]=pomme")); 
 console.log(jsx.queryStringToObject("a[0]=one&a[1]=five"));
@@ -577,6 +578,7 @@ This will output something like this:
 
 ```bash
 { a: '1' }
+{ a: '3' }
 { a: { '0': '1' } }
 { a: { '0': '1', '1': 'pomme' } }
 { a: { '0': 'one', '1': 'five' } }
@@ -863,7 +865,7 @@ $(document).ready(function () {
 
 url_merge_params
 ----------
-2020-04-03
+2020-04-03 -> 2020-05-14
 
 Combines the given url with the given url params and returns the result (nesting of params is supported).
 The third argument encodeParams defaults to true, and defines whether to encode the components using the encodeURIComponent js function.
@@ -895,7 +897,7 @@ console.log(jsx.url_merge_params("/my/url", {
 }, false)); // /my/url?name=boris&age=42&hobbies[0]=judo&hobbies[1]=karate&fish[small]=john&fish[big]=alice
 
 console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=1&name=boris
-
+console.log(jsx.url_merge_params("/my/url?a=1", {a: "3"})); // /my/url?a=3
 
 ```
 
@@ -910,6 +912,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=
 History Log
 =============
 
+- 1.28.1 -- 2020-05-14
+
+    - fix url_merge_params not merging variables with the same name 
+    
 - 1.28.0 -- 2020-05-13
 
     - add queryStringToObject function

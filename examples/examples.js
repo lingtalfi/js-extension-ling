@@ -89,6 +89,7 @@ console.log(jsx.url_merge_params("/my/url", {
 }, false)); // /my/url?name=boris&age=42&hobbies[0]=judo&hobbies[1]=karate&fish[small]=john&fish[big]=alice
 
 console.log(jsx.url_merge_params("/my/url?a=1", {name: "boris"})); // /my/url?a=1&name=boris
+console.log(jsx.url_merge_params("/my/url?a=1", {a: "3"})); // /my/url?a=3
 
 
 console.log(jsx.objectToQueryString({
@@ -223,4 +224,7 @@ console.log(util.inspect(jsx.queryStringToObject("a[fruits][red][]=strawberry"),
 }
  */
 console.log(util.inspect(jsx.queryStringToObject("a[fruits][red][]=strawberry&a[1]=five&a[fruits][red][]=cherry&a[fruits][yellow][]=lemon&a[fruits][yellow][688]=banana"), false, null, true));
+
+
+
 

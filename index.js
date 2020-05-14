@@ -480,15 +480,19 @@ var jsx = {
 
 
     url_merge_params: function (url, params, encodeParams = true) {
-        var q = this.objectToQueryString(params, encodeParams);
-
-        if (false === this.str_contains(url, "?")) {
-            url += '?';
-        } else {
-            url += '&';
+        let split = url.split('?', 2);
+        let qs = '';
+        let baseUrl = split.shift();
+        if (1 === split.length) {
+            qs = split.shift();
         }
-        url += q;
-        return url;
+        let urlParams = this.queryStringToObject(qs);
+        let allParams = this.extend(urlParams, params);
+        let q = this.objectToQueryString(allParams, encodeParams);
+        if (q.length > 0) {
+            baseUrl += '?' + q;
+        }
+        return baseUrl;
     },
 
 
