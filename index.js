@@ -365,6 +365,9 @@ var jsx = {
 
 
     toBool: function (thing) {
+        if ("0" === thing) {
+            return false;
+        }
         return !!thing;
     },
 

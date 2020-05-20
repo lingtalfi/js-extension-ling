@@ -1,6 +1,6 @@
 {
   "name": "js-extension-ling",
-  "version": "1.28.1",
+  "version": "1.28.2",
   "description": "A js helper library.",
   "main": "index.js",
   "scripts": {

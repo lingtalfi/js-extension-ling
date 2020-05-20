@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-05-13
+2020-04-02 -> 2020-05-20
 
 A js helper library.
 
@@ -678,7 +678,7 @@ console.log(jsx.str_contains("hello world", "blue")); // false
 
 toBool
 ----------
-2020-04-08
+2020-04-08 -> 2020-05-20
 
 Returns the boolean version of the given thing. 
 
@@ -695,6 +695,7 @@ console.log(jsx.toBool("anystring")); // true
 console.log(jsx.toBool("")); // false
 console.log(jsx.toBool("false")); // true
 console.log(jsx.toBool("true")); // true
+console.log(jsx.toBool("0")); // false
 ```
 
 
@@ -912,6 +913,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {a: "3"})); // /my/url?a=3
 History Log
 =============
 
+- 1.28.2 -- 2020-05-20
+
+    - fix toBool returning true when string "0" is passed 
+    
 - 1.28.1 -- 2020-05-14
 
     - fix url_merge_params not merging variables with the same name 
