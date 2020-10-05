@@ -1,6 +1,6 @@
 Js extension ling
 ===========
-2020-04-02 -> 2020-05-20
+2020-04-02 -> 2020-10-05
 
 A js helper library.
 
@@ -24,6 +24,7 @@ Functions summary
 * [basename](#basename)
 * [compareBlobs](#compareblobs)
 * [compareObjects](#compareobjects)
+* [convertHumanSizeToBytes](#converthumansizetobytes)
 * [cssId](#cssid)
 * [dirname](#dirname)
 * [escapeHtml](#escapehtml)
@@ -167,6 +168,27 @@ console.log(jsx.compareObjects({a:1,b:2},{b:2,a:1})); // true
 console.log(jsx.compareObjects({a:1,b:2},{a:1,b:3})); // false
 console.log(jsx.compareObjects({a:1,b:2},{a:1})); // false
 ```
+
+
+convertHumanSizeToBytes
+-----------
+2020-10-05
+
+Returns the number of bytes corresponding to the given human size.
+
+
+Example:
+
+```js
+console.log(jsx.convertHumanSizeToBytes("106")); // 106
+console.log(jsx.convertHumanSizeToBytes("1k")); // 1024
+console.log(jsx.convertHumanSizeToBytes("1m")); // 1048576
+console.log(jsx.convertHumanSizeToBytes("1.5 M")); // 1572864
+```
+
+
+
+
 
 cssId
 ----------
@@ -913,6 +935,10 @@ console.log(jsx.url_merge_params("/my/url?a=1", {a: "3"})); // /my/url?a=3
 History Log
 =============
 
+- 1.28.3 -- 2020-10-05
+
+    - add convertHumanSizeToBytes function
+    
 - 1.28.2 -- 2020-05-20
 
     - fix toBool returning true when string "0" is passed 

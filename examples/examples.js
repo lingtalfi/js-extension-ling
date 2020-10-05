@@ -226,5 +226,7 @@ console.log(util.inspect(jsx.queryStringToObject("a[fruits][red][]=strawberry"),
 console.log(util.inspect(jsx.queryStringToObject("a[fruits][red][]=strawberry&a[1]=five&a[fruits][red][]=cherry&a[fruits][yellow][]=lemon&a[fruits][yellow][688]=banana"), false, null, true));
 
 
-
-
+console.log(jsx.convertHumanSizeToBytes("106")); // 106
+console.log(jsx.convertHumanSizeToBytes("1k")); // 1024
+console.log(jsx.convertHumanSizeToBytes("1m")); // 1048576
+console.log(jsx.convertHumanSizeToBytes("1.5 M")); // 1572864

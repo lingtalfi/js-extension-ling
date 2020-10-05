@@ -126,8 +126,50 @@ var jsx = {
                 return this.compareObjects(x[i], y[i]);
             });
     },
+    convertHumanSizeToBytes: function (size) {
+        var ret = size;
 
+        var reg = new RegExp('^([0-9\.,]+)(.*)$', 'gi');
+        var result = reg.exec(size);
+        if (null !== result) {
+            var value = result[1];
+            var unit = result[2].trim().toLowerCase();
+            switch (unit) {
+                case 'o':
+                case 'b':
+                    ret = value;
+                    break;
+                case 'k':
+                    ret = value * 1024;
+                    break;
+                case 'm':
+                    ret = value * 1024 ** 2;
+                    break;
+                case 'g':
+                    ret = value * 1024 ** 3;
+                    break;
+                case 't':
+                    ret = value * 1024 ** 4;
+                    break;
+                case 'p':
+                    ret = value * 1024 ** 5;
+                    break;
+                case 'e':
+                    ret = value * 1024 ** 6;
+                    break;
+                case 'z':
+                    ret = value * 1024 ** 7;
+                    break;
+                case 'y':
+                    ret = value * 1024 ** 8;
+                    break;
+                default:
+                    break;
+            }
 
+        }
+        return parseInt(ret);
+    },
     cssId: function (prefix = 'jsx') {
         return prefix + '-' + this.getRandomNumber(0, 1000000);
     },
